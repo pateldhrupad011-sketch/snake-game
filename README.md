@@ -5,7 +5,8 @@ Sn@ke RUN is a Snake game I made for Hackclub's PIXL hackathon. The goal in the 
 
 ## Play the Game
 
-🔗 [Play Sn@ke RUN](https://pateldhrupad011-sketch.github.io/snake-game/)
+
+ [Play Sn@ke RUN](https://pateldhrupad011-sketch.github.io/snake-game/)
 
 ## How to play - to play this game the user would have to use the arrow keys to redirect the snake to eat the apples while making sure not to hit yourself and not to touch the red borders 
 
