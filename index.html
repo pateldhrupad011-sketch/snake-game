@@ -52,8 +52,8 @@
 
     function makeFood() {
       while (true) {
-        var fx = Math.floor(Math.random() * (cols - 2)) + 1;
-        var fy = Math.floor(Math.random() * (cols - 2)) + 1;
+        var fx = Math.floor(Math.random() * cols);
+        var fy = Math.floor(Math.random() * cols);
         if (!onSnake(fx, fy)) {
           return {x: fx, y: fy};
         }
@@ -110,7 +110,7 @@
       var headX = snake[0].x + dx;
       var headY = snake[0].y + dy;
 
-      if (headX < 1 || headX > cols - 2 || headY < 1 || headY > cols - 2) {
+      if (headX < 0 || headX >= cols || headY < 0 || headY >= cols) {
         lives -= 1;
         if (lives == 0) {
           gameOver = true;
