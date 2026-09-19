@@ -136,13 +136,13 @@
 
     function draw() {
       // background and top bar
-      ctx.fillStyle = "#18221a";
+      ctx.fillStyle = "#f5e6a8";
       ctx.fillRect(0, 0, w, h);
-      ctx.fillStyle = "#0f1410";
+      ctx.fillStyle = "#e8d48a";
       ctx.fillRect(0, 0, w, topBar);
 
       // grid
-      ctx.strokeStyle = "#28382b";
+      ctx.strokeStyle = "#d4c078";
       ctx.lineWidth = 1;
       for (var i = 0; i <= cols; i++) {
         ctx.beginPath();
@@ -207,7 +207,7 @@
       // score and hearts
       ctx.textBaseline = "middle";
       ctx.textAlign = "left";
-      ctx.fillStyle = "white";
+      ctx.fillStyle = "#2a2410";
       ctx.font = "24px Arial";
       ctx.fillText("Score: " + score, 15, 25);
       for (var i = 0; i < lives; i++) {
