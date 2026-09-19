@@ -23,11 +23,10 @@ This project was created for learning and experimentation.
 
 
 ## 🤖 AI Usage
-
-I used AI during the development of Sn@ke RUN to:
+AI Usage:
 -  Create the snake's face and apple designs.
 -  Help with debugging and fixing coding errors.
-- 📚Learn coding concepts and understand how to solve problems.
+-  Learn coding concepts and understand how to solve problems.
 -  Get guidance and ideas while building the game.
 
 I used AI as a learning tool to improve my coding skills, understand new concepts, and make my game better.
