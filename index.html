@@ -29,6 +29,17 @@
     var wallThickness = 4;
     var w = size * cols;
     var h = size * cols + topBar;
+    canvas.width = w;
+    canvas.height = h;
+
+    // start screen box and button
+    var panelW = 460;
+    var panelX = (w - panelW) / 2;
+    var panelY = h / 2 - 150;
+    var btnX = w / 2 - 80;
+    var btnY = panelY + 205;
+    var btnW = 160;
+    var btnH = 50;
 
     var snake = [{x: cols / 2, y: cols / 2}];
     var dx = 1;
@@ -39,6 +50,7 @@
     var lives = 3;
     var gameOver = false;
     var paused = false;
+    var started = false;
     var food = makeFood();
 
     function onSnake(x, y) {
@@ -79,6 +91,15 @@
       if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(e.key)) {
         e.preventDefault();
       }
+
+      // start screen: space or enter starts the game
+      if (!started) {
+        if (e.key == " " || e.key == "Enter") {
+          started = true;
+        }
+        return;
+      }
+
       if (e.key == "ArrowUp" && dy != 1) {
         newDx = 0;
         newDy = -1;
@@ -101,8 +122,21 @@
       }
     });
 
+    // clicking the start button
+    canvas.addEventListener("click", function (e) {
+      if (started) {
+        return;
+      }
+      var rect = canvas.getBoundingClientRect();
+      var mx = e.clientX - rect.left - canvas.clientLeft;
+      var my = e.clientY - rect.top - canvas.clientTop;
+      if (mx > btnX && mx < btnX + btnW && my > btnY && my < btnY + btnH) {
+        started = true;
+      }
+    });
+
     function update() {
-      if (gameOver || paused) {
+      if (!started || gameOver || paused) {
         return;
       }
       dx = newDx;
@@ -110,7 +144,11 @@
       var headX = snake[0].x + dx;
       var headY = snake[0].y + dy;
 
-      if (headX < 0 || headX >= cols || headY < 0 || headY >= cols) {
+      var hitWall = headX < 0 || headX >= cols || headY < 0 || headY >= cols;
+      var hitSelf = onSnake(headX, headY);
+
+      // hitting the wall or yourself costs a life
+      if (hitWall || hitSelf) {
         lives -= 1;
         if (lives == 0) {
           gameOver = true;
@@ -121,8 +159,6 @@
             paused = false;
           }, 700);
         }
-      } else if (onSnake(headX, headY)) {
-        gameOver = true;
       } else {
         snake.unshift({x: headX, y: headY});
         if (headX == food.x && headY == food.y) {
@@ -222,8 +258,44 @@
         ctx.fill();
       }
 
-      // game over box
-      if (gameOver) {
+      // controls hint in the top bar
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#6b5d2a";
+      ctx.font = "16px Arial";
+      ctx.fillText("Arrow keys to steer", w / 2, 25);
+
+      if (!started) {
+        // start screen
+        ctx.fillStyle = "black";
+        ctx.beginPath();
+        ctx.roundRect(panelX, panelY, panelW, 300, 15);
+        ctx.fill();
+        ctx.strokeStyle = "#46c85f";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        ctx.textAlign = "center";
+        ctx.fillStyle = "white";
+        ctx.font = "bold 52px Arial";
+        ctx.fillText("SNAKE", w / 2, panelY + 45);
+        ctx.font = "20px Arial";
+        ctx.fillText("Arrow keys: steer the snake", w / 2, panelY + 110);
+        ctx.fillText("Eat apples to grow", w / 2, panelY + 140);
+        ctx.fillText("Red wall or yourself = lose a life", w / 2, panelY + 170);
+
+        // start button
+        ctx.fillStyle = "#46c85f";
+        ctx.beginPath();
+        ctx.roundRect(btnX, btnY, btnW, btnH, 10);
+        ctx.fill();
+        ctx.fillStyle = "black";
+        ctx.font = "bold 26px Arial";
+        ctx.fillText("START", w / 2, btnY + 26);
+        ctx.fillStyle = "#c8c8c8";
+        ctx.font = "14px Arial";
+        ctx.fillText("or press SPACE", w / 2, btnY + 75);
+      } else if (gameOver) {
+        // game over box
         var boxW = 400;
         var boxX = (w - boxW) / 2;
         ctx.fillStyle = "black";
