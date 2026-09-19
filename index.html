@@ -17,19 +17,20 @@
   </style>
 </head>
 <body>
-  <canvas id="game" width="540" height="590"></canvas>
+  <canvas id="game" width="600" height="650"></canvas>
 
   <script>
     var canvas = document.getElementById("game");
     var ctx = canvas.getContext("2d");
 
     var size = 30;
-    var cols = 18;
+    var cols = 20;
     var topBar = 50;
+    var wallThickness = 12;
     var w = size * cols;
     var h = size * cols + topBar;
 
-    var snake = [{x: 9, y: 9}];
+    var snake = [{x: cols / 2, y: cols / 2}];
     var dx = 1;
     var dy = 0;
     var newDx = 1;
@@ -60,7 +61,7 @@
     }
 
     function resetSnake() {
-      snake = [{x: 9, y: 9}];
+      snake = [{x: cols / 2, y: cols / 2}];
       dx = 1;
       dy = 0;
       newDx = 1;
@@ -156,10 +157,10 @@
 
       // red walls
       ctx.fillStyle = "#be2323";
-      ctx.fillRect(0, topBar, w, size);
-      ctx.fillRect(0, h - size, w, size);
-      ctx.fillRect(0, topBar, size, size * cols);
-      ctx.fillRect(w - size, topBar, size, size * cols);
+      ctx.fillRect(0, topBar, w, wallThickness);
+      ctx.fillRect(0, h - wallThickness, w, wallThickness);
+      ctx.fillRect(0, topBar, wallThickness, size * cols);
+      ctx.fillRect(w - wallThickness, topBar, wallThickness, size * cols);
 
       // apple
       var ax = food.x * size + 15;
