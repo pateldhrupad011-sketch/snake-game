@@ -1,4 +1,4 @@
- Sn@ke RUN
+# Sn@ke RUN
 <img width="781" height="829" alt="Screenshot 2026-09-19 at 1 59 59 AM" src="https://github.com/user-attachments/assets/eab82d6c-9dd5-4c4d-958f-ab6330c5e66e" />
 
 Sn@ke RUN is a Snake game I made for Hackclub's PIXL hackathon. The goal in the game is to eat as many apples possible to grow your snake and reach to highest score without hitting yourself. The game gives 3 lives to the user, which can be lost if the snake hits it self or touches the red border line. I built it using HTML, CSS, and JavaScript while learning game development as a beginner
