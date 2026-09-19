@@ -17,16 +17,16 @@
   </style>
 </head>
 <body>
-  <canvas id="game" width="600" height="650"></canvas>
+  <canvas id="game" width="780" height="830"></canvas>
 
   <script>
     var canvas = document.getElementById("game");
     var ctx = canvas.getContext("2d");
 
     var size = 30;
-    var cols = 20;
+    var cols = 26;
     var topBar = 50;
-    var wallThickness = 12;
+    var wallThickness = 4;
     var w = size * cols;
     var h = size * cols + topBar;
 
@@ -224,9 +224,11 @@
 
       // game over box
       if (gameOver) {
+        var boxW = 400;
+        var boxX = (w - boxW) / 2;
         ctx.fillStyle = "black";
         ctx.beginPath();
-        ctx.roundRect(70, h / 2 - 90, 400, 180, 15);
+        ctx.roundRect(boxX, h / 2 - 90, boxW, 180, 15);
         ctx.fill();
         ctx.strokeStyle = "#be2323";
         ctx.lineWidth = 3;
